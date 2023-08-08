@@ -116,36 +116,16 @@ fun_intc_interchangeability <- function(
 }
 
 # # [TEST] ------------------------------------------------------------------
-# # - Data ------------------------------------------------------------------
-# library(readr)
-# library(tictoc)
-# 
-# read_rds(
-#   'C:/Users/Cao/Documents/Github/atlas-research/data/efa_model_equamax_15_factors.rds'
-# ) -> efa_model
-# 
-# read_csv(
-#   'C:/Users/Cao/Documents/Github/Atlas-Research/Data/df_atlas_complete_equamax_15_factors.csv'
-# ) -> df_occupations
-# 
-# read_csv(
-#   'https://docs.google.com/spreadsheets/d/e/2PACX-1vSVdXvQMe4DrKS0LKhY0CZRlVuCCkEMHVJHQb_U-GKF21CjcchJ5jjclGSlQGYa5Q/pub?gid=1515296378&single=true&output=csv'
-# ) -> df_input
-# 
 # # - Interchangeability test 1 -----------------------------------------------
-# tic()
 # fun_intc_interchangeability(
 #   dbl_similarity = runif(1, 0, 1)
 #   , dbl_scaling = 1
 # )
-# toc()
 # 
 # # - Interchangeability test 2 -----------------------------------------------
-# tic()
 # fun_intc_interchangeability(
 #   dbl_similarity = runif(1, 0, 1)
 #   , dbl_scaling = 1
 #   , dbl_years_education = 21
 #   , dbl_years_education_min = 25
 # )
-# toc()
