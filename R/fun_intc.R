@@ -78,7 +78,6 @@ fun_intc_interchangeability <- function(
   dbl_scaling[[1]] -> dbl_scaling
 
   # Apply equivalence function to similarity scores
-  # fun_eqvl_equivalence_similarity
   fun_eqvl_equivalence(
     dbl_var = dbl_similarity
     , dbl_scaling = dbl_scaling
@@ -92,7 +91,7 @@ fun_intc_interchangeability <- function(
     length(dbl_years_education_min)
   )){
 
-    fun_eqvl_equivalence_education(
+    fun_intc_equivalence_education(
       dbl_years_education =
         dbl_years_education
       , dbl_years_education_min =
@@ -116,78 +115,68 @@ fun_intc_interchangeability <- function(
 
 }
 
-# # [TEST] ------------------------------------------------------------------
-# # - Data ------------------------------------------------------------------
-# library(readr)
-# library(tictoc)
-#
-# read_rds(
-#   'C:/Users/Cao/Documents/Github/atlas-research/data/efa_model_equamax_15_factors.rds'
-# ) -> efa_model
-#
-# read_csv(
-#   'C:/Users/Cao/Documents/Github/Atlas-Research/Data/df_atlas_complete_equamax_15_factors.csv'
-# ) -> df_occupations
-#
-# read_csv(
-#   'https://docs.google.com/spreadsheets/d/e/2PACX-1vSVdXvQMe4DrKS0LKhY0CZRlVuCCkEMHVJHQb_U-GKF21CjcchJ5jjclGSlQGYa5Q/pub?gid=1515296378&single=true&output=csv'
-# ) -> df_input
-#
-# # - Interchangeability test 1 -----------------------------------------------
-# fun_match_similarity(
-#   df_data_rows =
-#     df_occupations %>%
-#     select(
-#       occupation
-#       , ends_with('.l')
-#     )
-#   , df_query_rows =
-#     df_input
-#   , chr_method = 'bvls'
-#   , dbl_scale_ub = 100
-#   , dbl_scale_lb = 0
-# ) -> df_similarity
-#
-# df_similarity$
-#   df_similarity ->
-#   df_similarity
-#
-# tic()
-# fun_match_interchangeability(
-#   dbl_similarity =
-#     df_similarity$
-#     similarity
-#   , dbl_scaling = 1
-# ) %>% round(4)
-# toc()
-#
-# # - Interchangeability test 2 -----------------------------------------------
-# fun_match_similarity(
-#   df_data_rows =
-#     df_occupations %>%
-#     select(
-#       occupation
-#       , ends_with('.l')
-#     )
-#   , df_query_rows =
-#     df_input
-#   , chr_method = 'bvls'
-#   , dbl_scale_ub = 100
-#   , dbl_scale_lb = 0
-# ) -> df_similarity
-#
-# df_similarity$
-#   df_similarity ->
-#   df_similarity
-#
-# tic()
-# fun_match_interchangeability(
-#   dbl_similarity =
-#     df_similarity$
-#     similarity
-#   , dbl_scaling = 1
-#   , dbl_years_education = 22
-#   , dbl_years_education_min =
-#     rep(25, nrow(df_similarity))
-# ) %>% round(4)
-# toc()
+# [TEST] ------------------------------------------------------------------
+# - Data ------------------------------------------------------------------
+library(readr)
+library(tictoc)
+
+read_rds(
+  'C:/Users/Cao/Documents/Github/atlas-research/data/efa_model_equamax_15_factors.rds'
+) -> efa_model
+
+read_csv(
+  'C:/Users/Cao/Documents/Github/Atlas-Research/Data/df_atlas_complete_equamax_15_factors.csv'
+) -> df_occupations
+
+read_csv(
+  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSVdXvQMe4DrKS0LKhY0CZRlVuCCkEMHVJHQb_U-GKF21CjcchJ5jjclGSlQGYa5Q/pub?gid=1515296378&single=true&output=csv'
+) -> df_input
+
+# - Interchangeability test 1 -----------------------------------------------
+tic()
+fun_intc_interchangeability(
+  dbl_similarity = runif(1, 0, 1)
+  , dbl_scaling = 1
+)
+toc()
+
+# - Interchangeability test 2 -----------------------------------------------
+tic()
+fun_intc_interchangeability(
+  dbl_similarity = runif(1, 0, 1)
+  , dbl_scaling = 1
+  , dbl_years_education = 21
+  , dbl_years_education_min = 25
+)
+toc()
+
+# - Interchangeability test 2 -----------------------------------------------
+fun_intc_similarity(
+  df_data_rows =
+    df_occupations %>%
+    select(
+      occupation
+      , ends_with('.l')
+    )
+  , df_query_rows =
+    df_input
+  , chr_method = 'bvls'
+  , dbl_scale_ub = 100
+  , dbl_scale_lb = 0
+) -> df_similarity
+
+df_similarity$
+  df_similarity ->
+  df_similarity
+
+tic()
+fun_intc_interchangeability(
+  dbl_similarity =
+    df_similarity$
+    similarity
+  , dbl_scaling = 1
+  , dbl_years_education = 22
+  , dbl_years_education_min =
+    rep(25, nrow(df_similarity))
+) %>% round(4)
+toc()
