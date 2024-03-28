@@ -116,7 +116,7 @@ fun_intc_ss <- function(
   
   # tau (education + xp) equivalence
   # default value if years are NULL 
-  dbl_years_eqvl -> 1
+  dbl_years_eqvl <- 1
     
   if(all(
     length(dbl_years),
